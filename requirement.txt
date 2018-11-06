@@ -1,0 +1,6 @@
+aiohttp
+selenium
+click
+python-dateutil
+logzero
+pyexecjs
