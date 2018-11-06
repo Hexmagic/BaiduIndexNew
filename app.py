@@ -57,6 +57,7 @@ class BaiduIndex(object):
 
     async def run(self, start=None, end=None, duration=None):
         self.session = aiohttp.ClientSession()
+        start_time = datetime.now()
         while True:
             if start and end:
                 pass
@@ -71,6 +72,10 @@ class BaiduIndex(object):
             await self._run(start, end)
             if not duration:
                 break
+            tomorrow_time = start_time + timedelta(days=1)
+            sleep_seconds = tomorrow_time - start_time
+            await self.sleep(sleep_seconds.total_seconds())
+            start_time = tomorrow_time
         await self.session.close()
         return "Done"
 
